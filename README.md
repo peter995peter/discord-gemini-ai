@@ -24,5 +24,13 @@
 9. 回到`config.json`，設置`gemini_key`成`["API_Key_1","API_Key_2"]` 你要放多少個都可以
 10. 恭喜你完成了
 
+## 修改提示詞
+1. 先去[這裡](https://makersuite.google.com/u/0/app/prompts/new_chat)，創建一個模板
+  * 修改的地方在`Write your prompt example`
+2. 按下`Get Code`，選擇`Python`(如果要選的話)
+3. 找到`convo = model.start_chat(history=[...])`，複製裡面的`history=[...]`，注意最後不要複製到`)`
+4. 打開`bot.py` 找到`async def history(cid):`然後刪掉後面的`history =[...]`，刪到`]`
+5. 貼上你剛剛複製的那一大段，完成
+
 ## 還沒寫
 可能等我哪天有空才會寫
