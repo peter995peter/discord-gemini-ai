@@ -1,1 +1,1 @@
-# discord-gemini-ai
+# Discord Gemini聊天機器人
