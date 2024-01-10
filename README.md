@@ -2,7 +2,7 @@
 
 ## config.json設置教學
 
-* `token`: 你機器人的token，可以前往[Discord Developer Protal](https://discord.com/developers/applications)創建
+* `token`: 你機器人的token，可以前往[Discord Developer Portal](https://discord.com/developers/applications)創建
 * `gemini_key`: Gemini的API Key，可以前往[這裡](https://makersuite.google.com/u/0/app/apikey)創建
   * 如果有需要更多使用額度(1個API Key一分鐘只能用60次)可以使用更多API Key，詳細請看[使用多個API Key](#使用多個api-key)
 * `developer`: 這應該不用解釋吧，寫上你的名稱就對了
