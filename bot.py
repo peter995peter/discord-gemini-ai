@@ -104,8 +104,9 @@ async def on_ready():
     
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
     if message.author.bot:
-    #if message.author == client.user:
         return
     if type(message.channel) == discord.DMChannel:
         if not(os.path.exists(f"data/dm-{message.author.id}.json")):
