@@ -1,5 +1,15 @@
 # Discord Gemini聊天機器人
 
+## 安裝教學
+1. 安裝[Python](https://www.python.org/downloads/release/python-3121/)
+2. [安裝PIP](https://bootstrap.pypa.io/get-pip.py)(如果確認有安裝可以跳過)
+3. 開啟控制台 輸入
+```
+pip install -r requirements.txt
+```
+4. 設置[config.json](#configjson設置教學)
+5. 啟動~~原神~~bot.py
+
 ## config.json設置教學
 
 * `token`: 你機器人的token，可以前往[Discord Developer Portal](https://discord.com/developers/applications)創建
