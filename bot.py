@@ -4,6 +4,7 @@ import os
 import json
 import itertools
 import aiofiles
+import requests
 
 
 data = json.load(open("config.json", encoding="utf-8"))
@@ -101,6 +102,52 @@ async def on_ready():
     status_w = discord.Status.online
     activity_w = discord.Activity(type=discord.ActivityType.playing, name=f"{prefix}help | 在{len(client.guilds)}個伺服器")
     await client.change_presence(status=status_w, activity=activity_w)
+    print("開始檢查版本")
+    sv = requests.get("https://raw.githubusercontent.com/peter995peter/discord-gemini-ai/main/versions.json").json()
+    uv = json.load(open("versions.json"))
+    if sv["main"] == uv["main"]:
+        print("檢查完成，無需更新")
+    else:
+        print(f"""
+檢查到更新
+當前版本：{uv["main"]}
+最新版本：{sv["main"]}
+        """)
+        print("本次更新影響檔案：")
+        sf = sv["files"]
+        uf = uv["files"]
+        update = {}
+        for fn in sf:
+            if fn in uf: #檢查伺服器裡的檔案在本機是否存在
+                if sf[fn] != uf[fn]: #如果版本不一樣的話
+                    update[fn] = "update"
+            else:
+                update[fn] = "create"
+        for fn in uf:
+            if not(fn in sf): #如果本機的檔案在伺服器上找不到的話
+                update[fn] = "delete"
+        symbol = {"update": "U", "create": "+", "delete": "-"}
+        for act in update:
+            print(f"{symbol[update[act]]} {act}")
+        uc = input("是否更新(y/n)：")
+        if uc == "y":
+            print("開始更新")
+            su = "https://raw.githubusercontent.com/peter995peter/discord-gemini-ai/main/"
+            for fn in update:
+                os.rename(fn, f"history/{uv['main']}-{fn}")
+                if update[fn] == "update" or update[fn] == "create":
+                    nf = requests.get(f"{su}{fn}").text
+                    async with aiofiles.open(f"{fn}", "w", encoding="utf-8") as file:
+                        await file.write(nf)
+                elif update[fn] == "delete":
+                    None
+            async with aiofiles.open(f"versions.json", "w", encoding="utf-8") as file:
+                await file.write(requests.get(f"{su}versions.json").text)
+            print("已更新完成")
+        elif uc == "n":
+            print("更新取消，如果要更新請重開")
+        else:
+            print("你要不要看看你在打什麼，如果要更新請重開")
     
 @client.event
 async def on_message(message):
