@@ -1,2 +1,4 @@
 discord.py
 google-generativeai
+aiofiles
+requests
