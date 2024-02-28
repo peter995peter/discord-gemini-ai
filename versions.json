@@ -1,7 +1,7 @@
 {
-    "main": "1.0.0",
+    "main": "1.0.1",
     "files": {
-        "bot.py": "1.0.0",
+        "bot.py": "1.0.1",
         "config.json": "1.0.0",
         "requirements.txt": "1.0.0"
     }
