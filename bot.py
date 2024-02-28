@@ -91,7 +91,7 @@ async def log(guild, channel, user):
     data = json.load(open(f"data/{channel}.json", encoding="utf-8"))
     if len(data) >= 50:
         del data[next(iter(data))]
-    data[user] = convo.last.text
+    data[f"{len(data)}. {user}"] = convo.last.text
     with open(f"data/{channel}.json", "w", encoding="utf-8") as file:
         json.dump(data,file, indent=2, ensure_ascii=False)
     return convo
