@@ -46,7 +46,7 @@ safety_settings = [
         "threshold": "BLOCK_NONE"
     }
 ]
-model = genai.GenerativeModel(model_name="gemini-pro", generation_config=generation_config, safety_settings=safety_settings)
+model = genai.GenerativeModel(model_name="gemini-1.0-pro", generation_config=generation_config, safety_settings=safety_settings)
 
 async def history(cid):
     history = [
@@ -183,14 +183,14 @@ async def on_message(message):
                         os.remove(f"data/{message.channel.id}.json")
                         await message.reply("聊天已關閉")
                     else:
-                        await message.reply("你不是管理員啊@@")
+                        await message.reply("你不是管理員，沒有權限使用unset")
                 if message.content == f"{prefix}reset":
                     if message.author.guild_permissions.administrator:
                         async with aiofiles.open(f"data/{message.channel.id}.json", "w", encoding="utf-8") as file:
                             await file.write("{}")
                         await message.reply("聊天已重置")
                     else:
-                        await message.reply("你不是管理員啊@@")
+                        await message.reply("你不是管理員，沒有權限使用reset")
             else:
                 await message.channel.typing()
                 try:
@@ -205,7 +205,7 @@ async def on_message(message):
                         await file.write("{}")
                     await message.reply("聊天已設定")
                 else:
-                    await message.reply("你不是管理員啊@@")
+                    await message.reply("你不是管理員，沒有權限使用set")
             if client.user in message.mentions:
                 if not(os.path.exists(f"data/tag-{message.author.id}.json")):
                     async with aiofiles.open(f"data/tag-{message.author.id}.json", "w", encoding="utf-8") as file:
